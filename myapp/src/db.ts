@@ -1,6 +1,6 @@
 import { MongoClient, Db } from 'mongodb';
 
-const uri: string = process.env.MONGODB_URI;
+const uri: string = process.env.MONGODB_URI as string;
 const client: MongoClient = new MongoClient(uri);
 
 let dbInstance: Db | null = null; // dbInstance をDb型またはnull型で初期化
@@ -26,4 +26,4 @@ async function connectDB(): Promise<Db> {
   }
 }
 
-export { connectDB }; // connectDB 関数をモジュールとしてエクスポート
+export default connectDB; // connectDB 関数をモジュールとしてエクスポート

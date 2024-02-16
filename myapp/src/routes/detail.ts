@@ -13,7 +13,13 @@ router.get('/:id', async (req: Request, res: Response) => {
         const memo = await collection.findOne({ _id: new ObjectId(req.params.id) });
         res.render('detail', { memo });
     } catch (e) {
-        res.status(500).send(e.toString());
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            res.status(500).send(e.message);
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 
@@ -29,7 +35,13 @@ router.post('/edit/:id', async (req: Request, res: Response) => {
         );
         res.redirect(`/detail/${req.params.id}`);
     } catch (e) {
-        res.status(500).send(e.toString());
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            res.status(500).send(e.message);
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 
@@ -41,8 +53,14 @@ router.post('/delete/:id', async (req: Request, res: Response) => {
         await collection.deleteOne({ _id: new ObjectId(req.params.id) });
         res.redirect('/display');
     } catch (e) {
-        console.error('削除中のエラー:', e);
-        res.status(500).send(e.toString());
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            res.status(500).send(e.message);
+            console.error('削除中のエラー:', e);
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 

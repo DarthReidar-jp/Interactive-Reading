@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "node ./dist/bin/www",
     "dev": "nodemon ./src/bin/www",
-    "sass": "sass ./src/stylesheets/style.scss ./public/stylesheets/style.css",
+    "sass": "sass ./src/stylesheets/:./public/stylesheets/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

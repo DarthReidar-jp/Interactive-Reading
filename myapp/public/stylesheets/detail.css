@@ -1,0 +1,7 @@
+@charset "UTF-8";
+/* スクロールバーを表示しないように設定 */
+textarea.content {
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=detail.css.map */

@@ -1,6 +1,6 @@
-import { OpenAI } from 'openai';
+import { OpenAI,ClientOptions} from 'openai';
 
-const openai = new OpenAI(process.env.OPENAI_API_KEY);
+const openai = new OpenAI(process.env.OPENAI_API_KEY as ClientOptions);
 
 async function getMemoVector(content: string): Promise<number[]> {
   const response = await openai.embeddings.create({

@@ -10,7 +10,13 @@ router.get('/', async (req: Request, res: Response) => {
     const { folders, memos } = await getAllFoldersAndMemos();
     res.render('display', { folders, memos }); // フォルダとメモのデータを渡す
   } catch (e) {
-    res.status(500).send(e.toString());
+    if (e instanceof Error) {
+      // eがErrorインスタンスである場合、そのmessageプロパティを使用
+      res.status(500).send(e.message);
+    } else {
+      // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+      res.status(500).send(String(e));
+    }
   }
 });
 

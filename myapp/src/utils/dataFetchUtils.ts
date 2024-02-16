@@ -9,7 +9,12 @@ export async function getAllFolders(): Promise<{ folders: Folder[] }> {
     const folders: Folder[] = await foldersCollection.find({}).toArray();
     return { folders };
   } catch (e) {
-    throw new Error(e.message);
+    // エラーがErrorインスタンスかどうかをチェック
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error(String(e));
+    }
   }
 }
 
@@ -19,7 +24,12 @@ export async function getAllMemos(): Promise<{ memos: Memo[] }> {
     const memos: Memo[] = await memosCollection.find({}).toArray();
     return { memos };
   } catch (e) {
-    throw new Error(e.message);
+    // エラーがErrorインスタンスかどうかをチェック
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error(String(e));
+    }
   }
 }
 
@@ -31,6 +41,11 @@ export async function getAllFoldersAndMemos(): Promise<{ folders: Folder[], memo
     const memos: Memo[] = await memosCollection.find({}).toArray();
     return { folders, memos };
   } catch (e) {
-    throw new Error(e.message);
+    // エラーがErrorインスタンスかどうかをチェック
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error(String(e));
+    }
   }
 }

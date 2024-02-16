@@ -34,7 +34,13 @@ router.get('/', async (req: Request, res: Response) => {
         printTree(result);
         res.render('treeSearchDisplay', { memos: result }); // 結果を表示画面に再利用
     } catch (e) {
-        res.status(500).send(e.toString());
+      if (e instanceof Error) {
+        // eがErrorインスタンスである場合、そのmessageプロパティを使用
+        res.status(500).send(e.message);
+      } else {
+        // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+        res.status(500).send(String(e));
+      }
     }
 });
 

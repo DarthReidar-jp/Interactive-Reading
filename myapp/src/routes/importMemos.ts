@@ -49,7 +49,13 @@ router.post('/', upload.single('jsonFile'), async (req: Request, res: Response) 
         fs.unlinkSync(req.file.path); // アップロードされたファイルを削除
         res.redirect('/display');
     } catch (e) {
-        res.status(500).send(e.message);
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            res.status(500).send(e.message);
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 

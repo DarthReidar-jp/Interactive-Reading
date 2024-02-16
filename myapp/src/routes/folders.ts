@@ -31,8 +31,14 @@ router.post('/', async (req: Request, res: Response) => {
   
         res.status(201).send({ message: 'Folder created successfully', folderId: folderId });
     } catch (e) {
-        console.error('Error creating folder:', e); // エラーログの詳細化
-        res.status(500).send({ message: 'Internal Server Error', error: e.message });
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            console.error('Error creating folder:', e); // エラーログの詳細化
+            res.status(500).send({ message: 'Internal Server Error', error: e.message });
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 
@@ -46,7 +52,13 @@ router.get('/:folderId', async (req: Request, res: Response) => {
         const result = await memosCollection.find({ folderIds: folderId }).toArray();
         res.render('display', { folders, memos: result }); // 結果を表示画面に再利用
     } catch (e) {
-        res.status(500).send(e.toString());
+        if (e instanceof Error) {
+            // eがErrorインスタンスである場合、そのmessageプロパティを使用
+            res.status(500).send(e.message);
+          } else {
+            // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+            res.status(500).send(String(e));
+          }
     }
 });
 

@@ -1,0 +1,45 @@
+body {
+  background-color: #e1e1e1;
+}
+
+.card {
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.card-body {
+  padding: 30px;
+}
+
+.title {
+  border: none;
+  box-shadow: none;
+  font-size: 1.73rem;
+  width: 100%;
+  outline: none;
+}
+.title.content {
+  animation: none;
+}
+
+.content {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  resize: none;
+  font-size: 1rem;
+  color: #646464;
+  width: 100%;
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  border: none;
+}
+
+.float-right {
+  float: right;
+  margin-top: 10px;
+}
+
+/*# sourceMappingURL=create.css.map */

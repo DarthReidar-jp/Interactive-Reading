@@ -140,8 +140,14 @@ async function performVectorSearchTree(query: string): Promise<any | null> {
         let tree = await buildTree(root, []); // 系統樹を構築する
         return tree;
     } catch (e) {
-        console.error("Error performing vector search tree:", e);
-        return null; // エラーが発生した場合はnullを返す
+        // エラーがErrorインスタンスかどうかをチェック
+        if (e instanceof Error) {
+            throw new Error(e.message);
+            console.error("Error performing vector search tree:", e);
+            return null; // エラーが発生した場合はnullを返す
+        } else {
+            throw new Error(String(e));
+        }
     }
 }
 
