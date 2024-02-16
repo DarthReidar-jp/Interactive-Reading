@@ -1,5 +1,6 @@
 // folder.ts
 export class Folder {
+    public _id?:string;
     public name: string;
     public description: string;
     public memoIds: string[];

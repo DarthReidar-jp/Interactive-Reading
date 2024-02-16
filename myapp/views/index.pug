@@ -1,5 +1,10 @@
-extends layout
-
-block content
-  a.btn.btn-primary(href='/display') View Memos
-  a.btn.btn-secondary(href='/create') Create New Memo
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel='stylesheet', href='/stylesheets/index.css')
+  body
+    a.custom-btn(href='/display') ページ一覧画面
+    a.custom-btn(href='/writer') writer

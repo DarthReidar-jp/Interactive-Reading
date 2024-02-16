@@ -98,10 +98,14 @@ async function buildTree(node: Memo, ancestors: Memo[], depth: number = 1): Prom
         const results = await collection.aggregate<Memo>(agg).toArray();
         console.log(`クエリの結果、${results.length} 個の潜在的な子ノードが見つかりました。`);
         // 自身と先祖のIDを除外
-        const excludedIds = [node._id.toString(), ...ancestors.map(a => a._id.toString())];
-        console.log(`除外すノードのID: ${excludedIds.join(', ')}`);
-        // 自信と先祖のフィルタリング
-        const filteredResults = results.filter(doc => !excludedIds.includes(doc._id.toString()));
+        const excludedIds = [node._id, ...ancestors.map(a => a._id)]
+        .filter(id => id !== undefined) // _idがundefinedでないものだけをフィルタリング
+        .map(id => id!.toString()); // _idがundefinedでないと確認できたので、非nullアサーション(!)を使用してtoString()を呼び出す
+        console.log(`除外するノードのID: ${excludedIds.join(', ')}`);
+        // 自身と先祖のフィルタリング
+        const filteredResults = results.filter(doc =>
+            doc._id !== undefined && !excludedIds.includes(doc._id.toString())
+        );
         console.log(`自身と先祖を除外した後、${filteredResults.length} 個の子ノードにフィルタリングされました。`);
 
         // スコアで降順にソートし、上位2つのドキュメントのみを選択

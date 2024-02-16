@@ -18,6 +18,7 @@ import treeSearchMemos from './routes/treeSearchMemos';
 import folders from './routes/folders';
 import createRouter from './routes/create';
 import detailRouter from './routes/detail';
+import writerRouter from './routes/writer';
 
 const app: Express = express(); // Express アプリケーションを作成
 
@@ -27,10 +28,11 @@ app.set('view engine', 'pug');
 
 // ミドルウェアの設定
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));// URLエンコードされたボディのサイズ制限を増やす
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
 
 // ルーターの設定
 app.use('/', indexRouter);
@@ -41,6 +43,7 @@ app.use('/search', searchMemos);
 app.use('/treeSearch', treeSearchMemos);
 app.use('/create', createRouter);
 app.use('/detail', detailRouter);
+app.use('/writer',writerRouter);
 
 // 404 エラーのハンドリング
 app.use(function (req: Request, res: Response, next: NextFunction) {
