@@ -1,0 +1,39 @@
+//- views/detail.pug
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/display.css')
+    link(rel='stylesheet', href='/stylesheets/create.css')
+    link(rel='stylesheet', href='/stylesheets/detail.css')
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script(src="/javascripts/detail.js")
+  body
+    header
+      .container.row
+        // アクションボタン群
+        .d-flex.justify-content-between.mt-4
+          a.custom-btn(href='/display') Back
+          form(method="POST", action=`/detail/delete/${memo._id}`)
+            button.custom-btn(type="submit") Delete
+        // 再エンベディングボタン
+        //.d-flex.justify-content-end.mt-3
+          form(method="POST", action=`/detail/reembed/${memo._id}`)
+            button.btn.btn-info(type="submit") Re-embed
+  
+    .container.mt-5
+      .row.justify-content-center
+        .col-lg-8
+          .card.p-3
+            .card-body
+                form(method="POST",action=`/detail/edit/${memo._id}`)
+                  .form-group.mb-4
+                    input.title(type="text", name="title",value=memo.title, required=true,autofocus)
+                  .form-group.mb-3
+                    textarea.content(type="text", name="content",required=true)
+                      |#{memo.content}
+                  button.custom-btn(type="submit") Update
+              
+
+
+

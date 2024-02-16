@@ -1,0 +1,41 @@
+/* 階層ごとのスタイリング */
+.memo-card {
+    border-left: solid 4px #ddd; /* 各メモの左側にボーダーを追加 */
+    margin-bottom: 10px; /* メモ間の余白 */
+    width: 200px;
+  }
+  
+  /* 各階層のインデント量と背景色 */
+  .level-0 { background-color: #f8d7da; }
+  .level-1 { background-color: #d1ecf1; margin-left: 30px; }
+  .level-2 { background-color: #d4edda; margin-left: 60px; }
+  .level-3 { background-color: #fff3cd; margin-left: 90px; }
+  .level-4 { background-color: #d3d3d3; margin-left: 120px; }
+  
+  .main-content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; /* 階層コンテナ間の間隔 */
+  }
+  
+  .level-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* メモカード間の間隔 */
+  }
+  
+  .memo-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .memo-body {
+    margin-bottom: 10px;
+  }
+  
+  .memo-score {
+    font-weight: bold;
+  }
+  

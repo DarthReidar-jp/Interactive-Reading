@@ -1,0 +1,62 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/display.css')
+    script(src="/javascripts/display.js")
+  body
+    header
+      .container.row
+        a.col-1.custom-btn(href='/create') New Memo
+        a.col-1.custom-btn(href='/display') View Memos
+        form.col-4.search-form(method="GET", action="/search")
+          .search-input-group
+            input.search-form-control(type="text", name="query", placeholder="Search memos...")
+            .search-input-group-append
+              button.btn-search(type="submit") Search
+        form.col-4.search-form(method="GET", action="/treeSearch")
+          .search-input-group
+            input.search-form-control(type="text", name="query", placeholder="Search memos...")
+            .search-input-group-append
+              button.btn-search(type="submit") ツリーサーチ 
+        if memos && memos.length > 0
+          button.col-1.custom-btn(type="button" onclick="addAllMemosToFolder()") Add All to Folder         
+    .container-fluid
+      .row
+        // サイドバー
+        .col-md-2.sidebar
+          .sidebar-content
+            // JSONインポートフォーム
+            p Import Memos
+            form(method="POST", action="/import", enctype="multipart/form-data")
+              .import-group
+                input.import-form(type="file", name="jsonFile", accept=".json")
+                button.import-btn(type="submit") Import
+            ul.folder-group
+              if folders && folders.length > 0
+                each folder in folders
+                  li.folder-group-item
+                    a(href=`/folders/${folder._id}`) #{folder.name}
+              else
+                li.folder-group-item フォルダがありません
+        // メインコンテンツ
+        .col-md-10.main-content
+          .row
+            .col-md-12
+              // メモカード一覧
+              .row
+                if memos.length
+                  each memo in memos
+                    .col-lg-2.col-md-4.mb-3
+                      .memo(data-memo-id=memo._id)
+                        .memo.d-flex.flex-column
+                          .memo-body.flex-fill
+                            h5.memo-title= memo.title
+                            p.memo-content= memo.content
+                            if memo.score 
+                              p.memo-content.score Score: #{memo.score.toFixed(5)}
+                            a.stretched-link(href=`/detail/${memo._id}`)
+                else
+                  .col-12
+                    p No memos found.
+
