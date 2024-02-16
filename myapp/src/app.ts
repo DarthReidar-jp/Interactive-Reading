@@ -19,6 +19,7 @@ import folders from './routes/folders';
 import createRouter from './routes/create';
 import detailRouter from './routes/detail';
 import writerRouter from './routes/writer';
+import editBookRoter from './routes/editBook';
 
 const app: Express = express(); // Express アプリケーションを作成
 
@@ -44,6 +45,7 @@ app.use('/treeSearch', treeSearchMemos);
 app.use('/create', createRouter);
 app.use('/detail', detailRouter);
 app.use('/writer',writerRouter);
+app.use('/book' ,editBookRoter);
 
 // 404 エラーのハンドリング
 app.use(function (req: Request, res: Response, next: NextFunction) {
