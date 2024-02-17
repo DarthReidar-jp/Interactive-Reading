@@ -37,7 +37,7 @@ router.get('/:bookId', async (req: Request, res: Response) => {
       if (book) {
           // Bookが見つかった場合、編集画面をレンダリング
           // 編集画面のテンプレートとして'editBook.pug'を仮定
-          res.render('editBook', { book });
+          res.render('writer', { book });
       } else {
           // Bookが見つからない場合、404エラーを表示
           res.status(404).send('Book not found');
@@ -75,6 +75,28 @@ router.post('/', async (req: Request, res: Response) => {
       } else {
           res.status(500).send(String(e));
       }
+  }
+});
+
+// 本の編集
+router.post('/edit/:bookid', async (req: Request, res: Response) => {
+  const { title, content } = req.body;
+  try {
+      const collection = await getDBCollection('books');
+      console.log(req.params);
+      await collection.updateOne(
+          { _id: new ObjectId(req.params.bookid) },
+          { $set: { title, content } }
+      );
+      res.redirect(`/writer/${req.params.bookid}`);
+  } catch (e) {
+      if (e instanceof Error) {
+          // eがErrorインスタンスである場合、そのmessageプロパティを使用
+          res.status(500).send(e.message);
+        } else {
+          // eがErrorインスタンスではない場合（文字列など）、toStringで変換
+          res.status(500).send(String(e));
+        }
   }
 });
 

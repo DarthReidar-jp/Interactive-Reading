@@ -19,7 +19,6 @@ import folders from './routes/folders';
 import createRouter from './routes/create';
 import detailRouter from './routes/detail';
 import writerRouter from './routes/writer';
-import editBookRoter from './routes/editBook';
 import bookDisplayRoter from './routes/bookDisplay';
 import readerRoter from'./routes/reader';
 
@@ -47,7 +46,6 @@ app.use('/treeSearch', treeSearchMemos);
 app.use('/create', createRouter);
 app.use('/detail', detailRouter);
 app.use('/writer',writerRouter);
-app.use('/book' ,editBookRoter);
 app.use('/bookDisplay',bookDisplayRoter);
 app.use('/reader', readerRoter);
 
