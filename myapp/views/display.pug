@@ -32,6 +32,12 @@ html
               .import-group
                 input.import-form(type="file", name="jsonFile", accept=".json")
                 button.import-btn(type="submit") Import
+            // JSONインポートフォームの下または適切な場所にプログレスバーを追加
+            p Import Progress
+            div.progress
+              div.progress-bar(role='progressbar', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100', style='width: 0%')
+                span.sr-only 0% Complete
+
             ul.folder-group
               if folders && folders.length > 0
                 each folder in folders
@@ -59,3 +65,13 @@ html
                 else
                   .col-12
                     p No memos found.
+  script(src="/socket.io/socket.io.js")
+  script.
+    const socket = io();
+    socket.on('progress', (data) => {
+      const progress = data.progress;
+      const progressBar = document.querySelector('.progress-bar');
+      progressBar.style.width = progress + '%';
+      progressBar.textContent = progress.toFixed(0) + '% Complete';
+      progressBar.setAttribute('aria-valuenow', progress);
+    });

@@ -9,6 +9,9 @@ const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 router.post('/', upload.single('jsonFile'), async (req: Request, res: Response) => {
+    // socket.ioで進行状況をクライアントに送信するための準備
+    const io = req.app.get('io'); // app.tsで設定したsocket.ioインスタンスを取得
+
     try {
         if (!req.file) {
             throw new Error('No file uploaded');
@@ -36,10 +39,9 @@ router.post('/', upload.single('jsonFile'), async (req: Request, res: Response) 
             }
         }
 
-        // バッチ処理を再帰的に呼び出す関数
-        async function processMemos(memos: Memo[]) {
-            if (memos.length === 0) {
-                // req.fileが存在するかチェック
+        // バッチ処理を再帰的に呼び出す関数の中で進行状況を送信
+        async function processMemos(memos: Memo[], startIndex: number = 0) {
+            if (startIndex >= memos.length) {
                 if (req.file && req.file.path) {
                     fs.unlinkSync(req.file.path); // 処理が完了したらファイルを削除
                 }
@@ -47,12 +49,11 @@ router.post('/', upload.single('jsonFile'), async (req: Request, res: Response) 
                 return;
             }
 
-            // 先頭から3つのメモを取得して処理
-            const batch = memos.slice(0, 3);
+            const batch = memos.slice(startIndex, startIndex + 3);
             await processBatch(batch);
+            io.emit("progress", { progress: Math.min(100, (startIndex + batch.length) / memos.length * 100) });
 
-            // 残りのメモに対して1分後に再帰的に処理
-            setTimeout(() => processMemos(memos.slice(3)), 60000);
+            setTimeout(() => processMemos(memos, startIndex + 3), 60000);
         }
 
         // メモのバッチ処理を開始

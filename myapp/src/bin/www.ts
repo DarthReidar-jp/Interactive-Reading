@@ -3,6 +3,7 @@ import app from '../app';
 import debugModule from 'debug';
 const debug = debugModule('myapp:server');
 import http from 'http';
+import { Server } from 'socket.io'; // socket.ioをインポート
 
 /**
  * Get port from environment and store in Express.
@@ -14,6 +15,21 @@ app.set('port', port);
  * Create HTTP server.
  */
 const server = http.createServer(app);
+
+// socket.ioのインスタンスを作成し、HTTPサーバーに紐付ける
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+
+    // 必要に応じてさらにイベントリスナーを設定
+});
+
+// Expressアプリケーションにsocket.ioインスタンスを追加
+app.set('io', io);
 
 /**
  * Listen on provided port, on all network interfaces.
