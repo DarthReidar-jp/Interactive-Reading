@@ -19,11 +19,6 @@ html
             input.search-form-control(type="text", name="query", placeholder="Search memos...")
             .search-input-group-append
               button.btn-search(type="submit") Search
-        form.col-4.search-form(method="GET", action="/treeSearch")
-          .search-input-group
-            input.search-form-control(type="text", name="query", placeholder="Search memos...")
-            .search-input-group-append
-              button.btn-search(type="submit") ツリーサーチ 
         if memos && memos.length > 0
           button.col-1.custom-btn(type="button" onclick="addAllMemosToFolder()") Add All to Folder         
     .container-fluid

@@ -20,6 +20,8 @@ import createRouter from './routes/create';
 import detailRouter from './routes/detail';
 import writerRouter from './routes/writer';
 import editBookRoter from './routes/editBook';
+import bookDisplayRoter from './routes/bookDisplay';
+import readerRoter from'./routes/reader';
 
 const app: Express = express(); // Express アプリケーションを作成
 
@@ -46,6 +48,8 @@ app.use('/create', createRouter);
 app.use('/detail', detailRouter);
 app.use('/writer',writerRouter);
 app.use('/book' ,editBookRoter);
+app.use('/bookDisplay',bookDisplayRoter);
+app.use('/reader', readerRoter);
 
 // 404 エラーのハンドリング
 app.use(function (req: Request, res: Response, next: NextFunction) {

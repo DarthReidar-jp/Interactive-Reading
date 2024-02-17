@@ -2,6 +2,7 @@
 import { getDBCollection } from './dbUtils';
 import { Folder } from '../models/folder'; // Folderクラスのインポート
 import { Memo } from '../models/memo'; // Memoクラスのインポート
+import { Book } from '../models/book'; // Memoクラスのインポート
 
 export async function getAllFolders(): Promise<{ folders: Folder[] }> {
   try {
@@ -32,6 +33,22 @@ export async function getAllMemos(): Promise<{ memos: Memo[] }> {
     }
   }
 }
+
+export async function getAllBooks(): Promise<{ books: Book[] }> {
+  try {
+    const booksCollection = await getDBCollection('books');
+    const books: Book[] = await booksCollection.find({}).toArray();
+    return { books };
+  } catch (e) {
+    // エラーがErrorインスタンスかどうかをチェック
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error(String(e));
+    }
+  }
+}
+
 
 export async function getAllFoldersAndMemos(): Promise<{ folders: Folder[], memos: Memo[] }> {
   try {

@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous")
+    link(rel='stylesheet', href='/stylesheets/bookDisplay.css')
+
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous")
+  </body>
+  body
+    header
+      .container.row
+        a.col-1.custom-btn(href='/writer') New book
+        form.col-4.search-form(method="GET", action="/treeSearch")
+          .search-input-group
+            input.search-form-control(type="text", name="query", placeholder="Search memos...")
+            .search-input-group-append
+              button.btn-search(type="submit") ツリーサーチ 
+    .container-fluid
+      .row
+        // サイドバー
+        .col-md-2.sidebar
+          .sidebar-content
+        // メインコンテンツ
+        .col-md-10.main-content
+          .row
+            .col-md-12
+              .row
+                if books.length
+                  each book in books
+                    .col-lg-2.col-md-4.mb-3
+                      .book(data-book-id=book._id)
+                        .book.d-flex.flex-column
+                          .book-body.flex-fill
+                            h5.book-title= book.title
+                            p.book-content= book.content
+                            //a.stretched-link(href=`/book/${book._id}`)
+                            a.col-1.custom-btn(href=`/book/${book._id}`) 書く
+                            p |
+                            a.col-1.custom-btn(href=`/reader/${book._id}`) 読む
+                else
+                  .col-12
+                    p No books found.
