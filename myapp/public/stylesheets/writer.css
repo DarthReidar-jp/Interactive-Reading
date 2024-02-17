@@ -11,14 +11,14 @@ body {
   padding: 30px;
 }
 
-.title {
+.title-design {
   border: none;
   box-shadow: none;
   font-size: 1.73rem;
   width: 100%;
   outline: none;
 }
-.title.content {
+.title-design.content {
   animation: none;
 }
 

@@ -5,9 +5,9 @@ export class Book {
     public content: string;
     public vector: number[];
   
-    constructor(title: string = '', content: string = '') {
+    constructor(title: string = '') {
       this.title = title;
-      this.content = content;
+      this.content = '';
       this.vector = [];
     }
   }

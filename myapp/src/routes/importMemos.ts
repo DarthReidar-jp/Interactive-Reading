@@ -49,11 +49,11 @@ router.post('/', upload.single('jsonFile'), async (req: Request, res: Response) 
                 return;
             }
 
-            const batch = memos.slice(startIndex, startIndex + 3);
+            const batch = memos.slice(startIndex, startIndex + 1);
             await processBatch(batch);
             io.emit("progress", { progress: Math.min(100, (startIndex + batch.length) / memos.length * 100) });
 
-            setTimeout(() => processMemos(memos, startIndex + 3), 60000);
+            setTimeout(() => processMemos(memos, startIndex + 1), 500);
         }
 
         // メモのバッチ処理を開始
