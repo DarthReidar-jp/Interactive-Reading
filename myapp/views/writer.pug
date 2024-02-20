@@ -1,49 +1,47 @@
-doctype html
-html
-  head
-    title= title
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM", crossorigin="anonymous")
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css")
-    link(rel="stylesheet", href="/stylesheets/writer.css")
-    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js")
-    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz", crossorigin="anonymous")
-    script(src="/javascripts/writer.js") 
-    script(src="/javascripts/sidebar.js")
-  body
-    header
-      .container.row
-        a.hamburger-btn(type="button")
-          span メニュー
+extends e-book-layout
 
-    .sidebar
-      .sidebar-content
-        a.custom-btn(href='/bookDisplay') 本一覧 
-        form.search-form(method="GET", action="/treeSearch")
-          .search-input-group
-            input.search-form-control(type="text", name="query", placeholder="Search memos...")
-            .search-input-group-append
-              button.btn-search(type="submit") ツリーサーチ
-    .container-fluid
-      .row
-        .col-md-8.main-content
-          .card
-            .card-body
-              if book
-                form(method="POST", action=`/writer/edit/${book._id}`)
-                  .form-group.mb-4
-                    input#title.title-design(type="text", name="title", value=book.title, required=true, autofocus)
-                  .form-group.mb-3
-                    textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入")
-                      = book.content
-                  button.custom-btn.float-right(type="submit") 更新
-              else
-                form(method="POST", action="/writer")
-                  .form-group.mb-3
-                    input#title.title-design(type="text", name="title", placeholder="タイトルを入力", required=true, autofocus)
-                  .form-group.mb-3.d-none
-                    textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入", required=true)
-                  button.custom-btn.float-right(type="submit") 送信
-        .col-4.mode-content 
+block extraHead
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css")
+  link(rel="stylesheet",href="/stylesheets/writer.css")
+  // ここにwriter.pug特有の追加のhead要素を記述
+
+block sidebarContent
+  a.custom-btn(href='/bookDisplay') 本一覧 
+  form.search-form(method="GET", action="/treeSearch")
+    .search-input-group
+      input.search-form-control(type="text", name="query", placeholder="Search memos...")
+      .search-input-group-append
+        button.btn-search(type="submit") ツリーサーチ
+
+block mainWindowContent
+  .col-md-8.main-content
+    .card
+      .card-body
+        if book
+              form(method="POST", action=`/writer/edit/${book._id}`)
+                .form-group.mb-4
+                  input#title.title-design(type="text", name="title", value=book.title, required=true, autofocus)
+                .form-group.mb-3
+                  textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入")
+                    = book.content
+                button.custom-btn.float-right(type="submit") 更新
+        else
+          form(method="POST", action="/writer")
+            .form-group.mb-3
+              input#title.title-design(type="text", name="title", placeholder="タイトルを入力", required=true, autofocus)
+            .form-group.mb-3.d-none
+              textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入", required=true)
+            button.custom-btn.float-right(type="submit") 送信
+  .col-3.mode-content 
+    .card
+      .card-body
+        h3.title ここはモード欄
+        .content
+          p 目次モード
+          p メモモード
+          p 辞書モード
+
+block extraScripts
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js")
+  script(src="/javascripts/writer.js")
+  // ここにwriter.pug特有の追加のスクリプトを記述

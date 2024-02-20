@@ -1,169 +1,24 @@
+@import 'e-book-layout';
 
-body {
-  background-color: #ffffff; // 背景を灰色に設定
-}
-
-header {
-  background-color: #ffffff;
-  color: #ffffff;
-  padding: 10px 10px;
-  text-align: center;
-
-  .hamburger-btn {
-    display: inline-block;
-    width: 5%;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    margin: 0.2rem;
-    padding: .2rem .2rem;
-    font-size: 0.75rem;
-    border-radius: 1rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    color: #ffffff;
-    background-color: #c1c1c1;
-    border-color: #cdcdcd;
-  }
-}
-
-/* サイドバーのスタイル */
-.sidebar {
-  background-color: #ababab;
-  padding: 5px;
-  position: fixed;
-  left: -250px;
-  transition: left 0.3s;
-  width: 8%;
-  text-align: center;
-
-  .sidebar-content {
-    position: sticky;
-    top: 20px;
-    // サイドバーの内容
-  }
-  .custom-btn {
-    display: inline;
-    width: 5%;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    text-decoration: none;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    margin: 0.2rem;
-    padding: .2rem .2rem;
-    font-size: 0.75rem;
-    border-radius: 1rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    color: #ffffff;
-    background-color: #c1c1c1;
-    border-color: #cdcdcd;
-  }
-}
-
-/* サイドバーがアクティブなときのスタイル */
-.sidebar-active {
-  .sidebar {
-    left: 0; // サイドバーを表示
-  }
-  .main-content {
-    margin-left: 250px; // メインコンテンツを右に移動
-  }
-}
-
-/* メインコンテンツのスタイル */
+/* writerページ特有のスタイル */
 .main-content {
-  transition: margin-left 0.3s; // サイドバー表示時のアニメーション
+  margin: 20px auto;
+  margin-top: 50px;
+  max-width: 800px; // メインコンテンツの最大幅
 }
-  
-.card {
-  border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  
-  &-body {
-    padding: 30px 30px 30px 80px;
-  }
+
+.title-design {
+  border: none; // 入力フォームのボーダーを無くす
+  outline: none;
+  box-shadow: none; // フォーム選択時のボーダーを消す
+  font-size: 1.73rem;
 }
-  
-.title {
-  body {
-    background-color: #e1e1e1; // 背景を灰色に設定
-  }
-    
-  .card {
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    
-    &-body {
-      padding: 30px;
-    }
-  }
-    
-  .title-design {
-    border: none; // 入力フォームのボーダーを無くす
-    box-shadow: none; // フォーム選択時のボーダーを消す
-    font-size: 1.73rem;
-    width: 100%;
-    outline: none;
-    
-    &.content {
-      animation: none;
-    }
-  }
-    
-  .content {
-    body {
-      background-color: #e1e1e1; // 背景を灰色に設定
-    }
-      
-    .card {
-      border-radius: 5px;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      
-      &-body {
-        padding: 30px;
-      }
-    }
-      
-    .title-design {
-      border: none; // 入力フォームのボーダーを無くす
-      box-shadow: none; // フォーム選択時のボーダーを消す
-      font-size: 1.73rem;
-      width: 100%;
-      outline: none;
-      
-      &.content {
-        animation: none;
-      }
-    }
-      
-    .content {
-      border: none;
-      outline: none;
-      border: none;
-      outline: none;
-      font-size: 1.73rem;
-      width: 80%;
-      outline: none;
-      
-      &.content {
-        animation: none;
-      }
-    }
-  }
+
+.content {
+  border: none;
+  outline: none;
+  font-size: 1.73rem;
+  width: 80%;
+  font-size: 1rem;
+  color: #646464;
 }
-  

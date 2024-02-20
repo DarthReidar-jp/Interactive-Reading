@@ -84,11 +84,4 @@ header .hamburger-btn, header .mode-btn {
   margin-top: 50px;
 }
 
-/* readerページ特有のスタイル */
-.main-content {
-  margin: 20px auto;
-  max-width: 800px;
-  margin-top: 50px;
-}
-
-/*# sourceMappingURL=reader.css.map */
+/*# sourceMappingURL=e-book-layout.css.map */
