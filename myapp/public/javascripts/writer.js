@@ -1,24 +1,44 @@
 $(document).ready(function() {
-  // SimpleMDEを初期化
-  var simplemde = new SimpleMDE({ element: document.querySelector('#markdownEditor') });
+  var simplemde;
 
-  // タイトル入力でEnterキーが押されたときにフォームを送信
-  $('#title').keydown(function(e) {
+  // SimpleMDEの初期化（編集モード用）
+  if ($('#markdownEditor').length > 0) {
+      simplemde = new SimpleMDE({
+          element: document.querySelector('#markdownEditor'),
+          spellChecker: false
+      });
+
+      // 編集モード時のフォーム送信処理
+      $('form').on('submit', function() {
+          $('#markdownEditor').val(simplemde.value());
+      });
+  }
+
+    // タイトル入力時の処理
+    $('#title').keydown(function(e) {
       if (e.key === 'Enter') {
-          e.preventDefault(); // フォームの自動送信を防止
-          $(this).closest('form').submit(); // 手動でフォームを送信
+          e.preventDefault();
+          var title = $(this).val();
+          $.ajax({
+              type: 'POST',
+              url: '/writer',
+              data: { title: title },
+              success: function(response) {
+                  // 生成されたBookのIDを用いてリダイレクト
+                  window.location.href = `/writer/${response.bookId}`;
+              },
+              error: function() {
+                  alert('エラーが発生しました。');
+              }
+          });
       }
-  });
+    });
 
-  // フォーム送信時の処理
-  $('form').on('submit', function() {
-      // SimpleMDEエディタの現在の値を取得して、<textarea>に設定
-      $('#markdownEditor').val(simplemde.value());
-  });
-
-  // テキストエリアの高さ自動調整
-  $('textarea').on('input', function() {
+  
+    // テキストエリアの高さ自動調整
+    $('textarea').on('input', function() {
       this.style.height = 'auto';
       this.style.height = (this.scrollHeight) + 'px';
+    });
   });
-});
+  

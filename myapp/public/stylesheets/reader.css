@@ -58,7 +58,8 @@ header .hamburger-btn, header .mode-btn {
   transition: right 0.3s;
   top: 0;
   bottom: 0;
-  background-color: #ababab;
+  background-color: #ffffff;
+  border-left: #333;
   padding: 20px;
   width: 350px;
   z-index: 1000;
@@ -89,6 +90,13 @@ header .hamburger-btn, header .mode-btn {
   margin: 20px auto;
   max-width: 800px;
   margin-top: 50px;
+}
+.main-content .card {
+  padding: 30px 45px 30px 45px;
+}
+
+.title{
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=reader.css.map */

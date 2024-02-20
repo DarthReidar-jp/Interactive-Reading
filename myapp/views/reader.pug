@@ -11,13 +11,26 @@ block mainWindowContent
     .card
       .card-body
         h2.title #{book.title}
-        .content
-          p #{book.content}
+        .content!= book.contentHtml
   .col-3.mode-content
     .card
       .card-body
-        h3.title ここはモード欄
-        .content
-          p 目次モード
-          p メモモード
-          p 辞書モード
+        button#showMemoBtn メモを表示
+        button#showIndexBtn 目次を表示
+        button#showDictionaryBtn 辞書を表示
+        .mode-div#memoMode(style='display:none;')
+          form#memoForm
+            .form-group.mb-3
+              input#memoTitle.title(type="text", name="title", placeholder="メモのタイトル", required=true, autofocus)
+            .form-group.mb-3
+              textarea#memoContent.content(name="content", placeholder="メモの内容", required=true)
+            button#submitMemo.custom-btn.float-right(type="button") 送信
+        .mode-div#indexMode(style='display:none;')
+          // 目次モードのコンテンツ
+          p 目次モードの内容
+        .mode-div#dictionaryMode(style='display:none;')
+          // 辞書モードのコンテンツ
+          p 辞書モードの内容
+block extraScripts
+  script(src="/javascripts/changeMode.js")
+  script(src="/javascripts/memoMode.js")

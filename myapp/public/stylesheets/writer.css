@@ -58,7 +58,8 @@ header .hamburger-btn, header .mode-btn {
   transition: right 0.3s;
   top: 0;
   bottom: 0;
-  background-color: #ababab;
+  background-color: #ffffff;
+  border-left: #333;
   padding: 20px;
   width: 350px;
   z-index: 1000;
@@ -96,6 +97,7 @@ header .hamburger-btn, header .mode-btn {
   outline: none;
   box-shadow: none;
   font-size: 1.73rem;
+  margin-bottom: 10px;
 }
 
 .content {
@@ -103,7 +105,7 @@ header .hamburger-btn, header .mode-btn {
   outline: none;
   font-size: 1.73rem;
   width: 80%;
-  font-size: 1rem;
+  line-height: 1.5;
   color: #646464;
 }
 

@@ -7,41 +7,50 @@ block extraHead
 
 block sidebarContent
   a.custom-btn(href='/bookDisplay') 本一覧 
-  form.search-form(method="GET", action="/treeSearch")
-    .search-input-group
-      input.search-form-control(type="text", name="query", placeholder="Search memos...")
-      .search-input-group-append
-        button.btn-search(type="submit") ツリーサーチ
 
 block mainWindowContent
   .col-md-8.main-content
     .card
       .card-body
         if book
-              form(method="POST", action=`/writer/edit/${book._id}`)
-                .form-group.mb-4
-                  input#title.title-design(type="text", name="title", value=book.title, required=true, autofocus)
-                .form-group.mb-3
-                  textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入")
-                    = book.content
-                button.custom-btn.float-right(type="submit") 更新
+          //編集モード
+          form(method="POST", action=`/writer/edit/${book._id}`)
+            .form-group.mb-4
+              input.title-design(type="text", name="title", value=book.title, required=true, autofocus)
+            .form-group.mb-3
+              textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入")
+                = book.content
+            button.custom-btn.float-right(type="submit") 更新
         else
-          form(method="POST", action="/writer")
+          // 新規作成のためのタイトル入力フォーム
+          form#newBookForm(method="POST", action="/writer")
             .form-group.mb-3
               input#title.title-design(type="text", name="title", placeholder="タイトルを入力", required=true, autofocus)
-            .form-group.mb-3.d-none
-              textarea#markdownEditor.form-control(name="content", placeholder="ここにマークダウンで文章を記入", required=true)
-            button.custom-btn.float-right(type="submit") 送信
   .col-3.mode-content 
     .card
       .card-body
-        h3.title ここはモード欄
-        .content
-          p 目次モード
-          p メモモード
-          p 辞書モード
-
+        button#showMemoBtn メモを表示
+        button#showIndexBtn 目次を表示
+        button#showDictionaryBtn 辞書を表示
+        .mode-div#memoMode(style='display:none;')
+          form#memoForm
+            .form-group.mb-3
+              input#memoTitle.title(type="text", name="title", placeholder="メモのタイトル", required=true, autofocus)
+            .form-group.mb-3
+              textarea#memoContent.content(name="content", placeholder="メモの内容", required=true)
+            button#submitMemo.custom-btn.float-right(type="button") 送信
+        .mode-div#indexMode(style='display:none;')
+          // 目次モードのコンテンツ
+          p 目次モードの内容
+        .mode-div#dictionaryMode(style='display:none;')
+          form.search-form(method="GET", action="/treeSearch")
+            .search-input-group
+              input.search-form-control(type="text", name="query", placeholder="Search memos...")
+              .search-input-group-append
+                button.btn-search(type="submit") ツリーサーチ
 block extraScripts
   script(src="https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js")
   script(src="/javascripts/writer.js")
+  script(src="/javascripts/changeMode.js")
+  script(src="/javascripts/memoMode.js")
   // ここにwriter.pug特有の追加のスクリプトを記述
