@@ -1,5 +1,85 @@
+@charset "UTF-8";
 body {
-  background-color: #e1e1e1;
+  background-color: #ffffff;
+}
+
+header {
+  background-color: #ffffff;
+  color: #ffffff;
+  padding: 10px 10px;
+  text-align: center;
+}
+header .hamburger-btn {
+  display: inline-block;
+  width: 5%;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  margin: 0.2rem;
+  padding: 0.2rem 0.2rem;
+  font-size: 0.75rem;
+  border-radius: 1rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #ffffff;
+  background-color: #c1c1c1;
+  border-color: #cdcdcd;
+}
+
+/* サイドバーのスタイル */
+.sidebar {
+  background-color: #ababab;
+  padding: 5px;
+  position: fixed;
+  left: -250px;
+  transition: left 0.3s;
+  width: 8%;
+  text-align: center;
+}
+.sidebar .sidebar-content {
+  position: sticky;
+  top: 20px;
+}
+.sidebar .custom-btn {
+  display: inline;
+  width: 5%;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  margin: 0.2rem;
+  padding: 0.2rem 0.2rem;
+  font-size: 0.75rem;
+  border-radius: 1rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #ffffff;
+  background-color: #c1c1c1;
+  border-color: #cdcdcd;
+}
+
+/* サイドバーがアクティブなときのスタイル */
+.sidebar-active .sidebar {
+  left: 0;
+}
+.sidebar-active .main-content {
+  margin-left: 250px;
+}
+
+/* メインコンテンツのスタイル */
+.main-content {
+  transition: margin-left 0.3s;
 }
 
 .card {
@@ -8,38 +88,24 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 .card-body {
-  padding: 30px;
+  padding: 30px 30px 30px 80px;
 }
 
-.title-design {
-  border: none;
-  box-shadow: none;
+.title {
   font-size: 1.73rem;
-  width: 100%;
+  width: 80%;
   outline: none;
 }
-.title-design.content {
+.title.content {
   animation: none;
 }
 
 .content {
-  border: none;
-  outline: none;
   box-shadow: none;
   resize: none;
   font-size: 1rem;
   color: #646464;
-  width: 100%;
-}
-
-.btn-success {
-  background-color: #4CAF50;
-  border: none;
-}
-
-.float-right {
-  float: right;
-  margin-top: 10px;
+  width: 80%;
 }
 
 /*# sourceMappingURL=writer.css.map */
