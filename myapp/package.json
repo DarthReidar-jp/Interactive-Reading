@@ -10,8 +10,7 @@
     "dev": "nodemon ./src/bin/www",
     "tsc": "tsc",
     "sass": "sass ./src/stylesheets/:./public/stylesheets/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm run build && vercel --prod"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6",
