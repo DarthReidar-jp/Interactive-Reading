@@ -6,6 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc && sass ./src/stylesheets/:./public/stylesheets/",
+    "deploy": "npm install && npm run build",
     "start": "node ./dist/bin/www",
     "dev": "nodemon ./src/bin/www",
     "tsc": "tsc",
