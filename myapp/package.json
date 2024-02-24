@@ -2,7 +2,7 @@
   "name": "myapp",
   "version": "0.0.0",
   "description": "",
-  "main": "app.ts",
+  "main": "app.js",
   "type": "commonjs",
   "scripts": {
     "build": "tsc && sass ./src/stylesheets/:./public/stylesheets/",
